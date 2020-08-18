@@ -1,0 +1,85 @@
+/**
+
+NOT SOLVED
+||== Konsep Penyimpanan Token baik disisi Client maupun Server ==||
+
+1. user login, dan mendapatkan Token
+2. token yang didapatkan disimpan ke tabel Penyimpanan token sementara (server)
+3. token yang didapatkan hasil dari login disimpan di localStorage (client)
+   - indexedDB
+   - cookies
+   - dll
+4. buat expired time untuk token yang disimpan di localStorage (client)
+   - bisa menggunakan expired time di redis
+   - menggunakan jwt token expired, jadi nanti pengecekan langsung dari tokennya
+5. saat token telah expired di client, hapus token dari tabel penyimpanan token di DB (client & server)
+
+-> masalah : 
+   - cara mendeteksi token expired
+   - saat token expired apakah ada cara otomatis menghapus token di tabel penyimpanan di server
+     atau harus melalui interaksi dengan user ..?
+   
+CLUE -> cari cara menggunakan redis :
+        - apakah dengan redis bisa otomatis konek ke server dan menghapus token yg telah expired di tabel
+          penyimpanannya?
+        - apakah redis hanya mengasih tau bahwa ada token yang telah expired,
+          :jadi harus cek ke redis dulu, jika terdapat token yang telah expired
+          :maka dihapus di tabel penyimpanan dan dihapus di redis-nya
+        CMIIW
+*/
+
+
+/**
+
+NOT SOLVED
+||== Konsep Oauth ==||
+
+- access token dan refresh token
+  *refresh token nanti dimasukkan dalam daftar hitam / sudah pernah digunakan
+
+*/
+
+
+/**
+
+==| mengapa kita harus menggunakan token penyegaran? |==
+
+Jawaban ini telah disatukan oleh bantuan dua pengembang senior (John Brayton dan David Jennes).
+
+Alasan utama untuk menggunakan token penyegaran adalah untuk mengurangi permukaan serangan.
+
+Misalkan tidak ada kunci penyegaran dan mari kita telusuri contoh ini:
+
+Sebuah bangunan memiliki 80 pintu. Semua pintu dibuka dengan kunci yang sama. Kuncinya berubah setiap 30 menit. Di akhir 30 menit saya harus memberikan kunci lama kepada pembuat kunci dan mendapatkan kunci baru.
+
+Jika saya peretas dan mendapatkan kunci Anda, maka pada akhir 30 menit, saya akan mengirimkannya kepada pembuat kunci dan mendapatkan kunci baru. Saya akan dapat membuka semua pintu secara terus-menerus terlepas dari perubahan kuncinya.
+
+Pertanyaan: Selama 30 menit, berapa banyak peluang peretasan yang saya miliki terhadap kunci? Saya memiliki 80 peluang peretasan, setiap kali Anda menggunakan kunci (anggap ini sebagai membuat permintaan jaringan dan melewati token akses untuk mengidentifikasi diri Anda). Jadi itu serangan permukaan 80X.
+
+Sekarang mari kita telusuri contoh yang sama tetapi kali ini mari kita asumsikan ada kunci penyegaran.
+
+Sebuah bangunan memiliki 80 pintu. Semua pintu dibuka dengan kunci yang sama. Kuncinya berubah setiap 30 menit. Untuk mendapatkan kunci baru, saya tidak bisa melewatkan token akses lama. Saya hanya harus melewati kunci penyegaran.
+
+Jika saya peretas dan mendapatkan kunci Anda, saya dapat menggunakannya selama 30 menit, tetapi pada akhir 30 menit mengirimkannya ke pembuat kunci tidak memiliki nilai. Jika saya melakukannya, maka pembuat kunci hanya akan mengatakan token penyegaran yang buruk ini. Untuk dapat memperpanjang hack saya, saya harus meretas kurir ke pembuat kunci. Kurir memiliki kunci berbeda (anggap ini sebagai token penyegaran).
+
+Pertanyaan: Selama 30 menit, berapa banyak peluang peretasan yang saya miliki terhadap kunci refresh? 80? Tidak. Saya hanya punya 1 kesempatan meretas. Selama ini kurir berkomunikasi dengan pembuat kunci. Jadi itu serangan permukaan 1X. Saya memang memiliki 80 peluang peretasan melawan kunci, tetapi mereka tidak baik setelah 30 menit.
+
+Server akan memverifikasi token akses berdasarkan kredensial dan penandatanganan (biasanya) JWT.
+
+Bocor token akses buruk, tetapi begitu kadaluarsa tidak lagi berguna bagi penyerang. Kebocoran tanda penyegaran jauh lebih buruk, tetapi agaknya kemungkinan itu kecil. (Saya pikir ada ruang untuk mempertanyakan apakah kemungkinan token bocor jauh lebih rendah dibandingkan dengan token akses bocor, tapi itu idenya.)
+
+Poinnya adalah bahwa token akses ditambahkan ke setiap permintaan yang Anda buat, sedangkan token penyegaran hanya digunakan selama aliran penyegaran. Jadi, lebih sedikit peluang MITM melihat token tersebut.
+
+Frekuensi membantu penyerang. Kelemahan keamanan potensial yang mirip jantung di SSL, kelemahan keamanan potensial pada klien, dan kelemahan keamanan potensial di server semuanya memungkinkan kebocoran.
+
+Selain itu, jika server otorisasi terpisah dari server aplikasi yang memproses permintaan klien lain, maka server aplikasi tidak akan pernah melihat token penyegaran. Itu hanya akan melihat token akses yang tidak akan hidup lebih lama.
+
+Kompartementalisasi baik untuk keamanan.
+
+Terakhir tetapi tidak kalah penting, lihat jawaban yang luar biasa ini
+
+Apa token penyegaran BUKAN tentang?
+
+Kemampuan untuk memperbarui / mencabut tingkat akses melalui token penyegaran adalah produk sampingan dari memilih untuk menggunakan token penyegaran, jika tidak token akses mandiri dapat dicabut atau tingkat aksesnya diubah ketika kedaluwarsa dan pengguna mendapat token baru
+
+*/
