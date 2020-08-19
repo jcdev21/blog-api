@@ -13,6 +13,7 @@ import BlogRoutes from './routers/BlogRoutes';
 
 // Client Routers
 import ClientBlogRoutes from './routers/client/ClientBlogRoutes';
+import TestingRoutes from './routers/client/TestingRoutes';
 
 class App {
     public app: Application;
@@ -41,6 +42,7 @@ class App {
 
         // Client
         this.app.use('/api', cors(), ClientBlogRoutes);
+        this.app.use('/testing', cors(), TestingRoutes);
 
         // Server
         this.app.use('/api/v1/users', UserRoutes);

@@ -16,6 +16,7 @@ var AuthRoutes_1 = __importDefault(require("./routers/AuthRoutes"));
 var BlogRoutes_1 = __importDefault(require("./routers/BlogRoutes"));
 // Client Routers
 var ClientBlogRoutes_1 = __importDefault(require("./routers/client/ClientBlogRoutes"));
+var TestingRoutes_1 = __importDefault(require("./routers/client/TestingRoutes"));
 var App = /** @class */ (function () {
     function App() {
         this.app = express_1.default();
@@ -38,6 +39,7 @@ var App = /** @class */ (function () {
         });
         // Client
         this.app.use('/api', cors_1.default(), ClientBlogRoutes_1.default);
+        this.app.use('/testing', cors_1.default(), TestingRoutes_1.default);
         // Server
         this.app.use('/api/v1/users', UserRoutes_1.default);
         this.app.use('/api/v1/auth', AuthRoutes_1.default);
