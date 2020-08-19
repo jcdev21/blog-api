@@ -40,7 +40,7 @@ class App {
         });
 
         // Client
-        this.app.use('/api', ClientBlogRoutes);
+        this.app.use('/api', cors(), ClientBlogRoutes);
 
         // Server
         this.app.use('/api/v1/users', UserRoutes);
