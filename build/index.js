@@ -37,7 +37,7 @@ var App = /** @class */ (function () {
             res.send("Blog API, by. Muhammad Jundurrahman");
         });
         // Client
-        this.app.use('/api', ClientBlogRoutes_1.default);
+        this.app.use('/api', cors_1.default(), ClientBlogRoutes_1.default);
         // Server
         this.app.use('/api/v1/users', UserRoutes_1.default);
         this.app.use('/api/v1/auth', AuthRoutes_1.default);
