@@ -25,17 +25,12 @@ class App {
     }
 
     protected plugins(): void {
-        this.app.use(function(req, res, next) {
-            res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            next();
-        });
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
         this.app.use(morgan("dev"));
         this.app.use(compression());
         this.app.use(helmet());
-        // this.app.use(cors());
+        this.app.use(cors());
         this.app.use('/uploads', express.static('uploads'));
     }
 

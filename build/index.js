@@ -8,6 +8,7 @@ var body_parser_1 = __importDefault(require("body-parser"));
 var morgan_1 = __importDefault(require("morgan"));
 var compression_1 = __importDefault(require("compression"));
 var helmet_1 = __importDefault(require("helmet"));
+var cors_1 = __importDefault(require("cors"));
 var dotenv_1 = require("dotenv");
 // Routers
 var UserRoutes_1 = __importDefault(require("./routers/UserRoutes"));
@@ -23,17 +24,12 @@ var App = /** @class */ (function () {
         dotenv_1.config();
     }
     App.prototype.plugins = function () {
-        this.app.use(function (req, res, next) {
-            res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            next();
-        });
         this.app.use(body_parser_1.default.urlencoded({ extended: true }));
         this.app.use(body_parser_1.default.json());
         this.app.use(morgan_1.default("dev"));
         this.app.use(compression_1.default());
         this.app.use(helmet_1.default());
-        // this.app.use(cors());
+        this.app.use(cors_1.default());
         this.app.use('/uploads', express_1.default.static('uploads'));
     };
     App.prototype.routes = function () {
