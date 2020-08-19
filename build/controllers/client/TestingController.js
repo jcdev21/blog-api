@@ -43,7 +43,7 @@ var TestingController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, res.send({
                         data: [{
-                                status: 'ok'
+                                status: 'oke'
                             }],
                         msg: 'success'
                     })];

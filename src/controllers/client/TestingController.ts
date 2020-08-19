@@ -4,7 +4,7 @@ class TestingController {
     index = async (req: Request, res: Response): Promise<Response> => {
         return res.send({
             data: [{
-                status: 'ok'
+                status: 'oke'
             }],
             msg: 'success'
         });
