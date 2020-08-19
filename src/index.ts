@@ -30,7 +30,13 @@ class App {
         this.app.use(morgan("dev"));
         this.app.use(compression());
         this.app.use(helmet());
-        this.app.use(cors());
+        this.app.use(
+            cors({
+                credentials: true,
+                origin: true
+            })
+        );
+        this.app.options('*', cors());
         this.app.use('/uploads', express.static('uploads'));
     }
 
