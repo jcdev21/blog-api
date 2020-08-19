@@ -36,7 +36,7 @@ class App {
 
     protected routes(): void {
         this.app.route('/').get((req: Request, res: Response) => {
-            res.send("Blog API, by. Muhammad Jundurrahman");
+            res.send("Blog API, by. Muhammad Jundurrahmans ok");
         });
 
         // Client

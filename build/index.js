@@ -34,7 +34,7 @@ var App = /** @class */ (function () {
     };
     App.prototype.routes = function () {
         this.app.route('/').get(function (req, res) {
-            res.send("Blog API, by. Muhammad Jundurrahman");
+            res.send("Blog API, by. Muhammad Jundurrahmans ok");
         });
         // Client
         this.app.use('/api', cors_1.default(), ClientBlogRoutes_1.default);
