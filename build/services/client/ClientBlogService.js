@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var db = require('../../db/models');
-var queryString = require('querystring');
 var ClientBlogService = /** @class */ (function () {
     function ClientBlogService(req) {
         var _this = this;

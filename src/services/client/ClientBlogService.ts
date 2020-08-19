@@ -1,6 +1,5 @@
 import { Request } from 'express';
 const db = require('../../db/models');
-const queryString = require('querystring');
 
 class ClientBlogService {
     params: Request['params'];
