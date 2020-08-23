@@ -25,7 +25,7 @@ module.exports = {
                 values: ['admin', 'member']
             },
             is_active: {
-                type: Sequelize.TINYINT(1)
+                type: Sequelize.INTEGER(1) // di mysql memakai : Sequelize.TINYINT(1)
             },
             created_at: {
                 allowNull: false,

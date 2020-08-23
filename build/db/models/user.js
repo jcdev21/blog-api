@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         name: DataTypes.STRING,
         photo: DataTypes.STRING,
         level: DataTypes.ENUM(['admin', 'member']),
-        is_active: DataTypes.TINYINT
+        is_active: DataTypes.INTEGER // di mysql memakai : DataTypes.TINYINT
     }, {
         underscored: true,
     });

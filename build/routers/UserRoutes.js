@@ -43,7 +43,7 @@ var UserRoutes = /** @class */ (function (_super) {
     }
     UserRoutes.prototype.routes = function () {
         this.router.get('/', AuthMiddleware_1.auth, AuthMiddleware_1.adminAccess, UserController_1.default.index);
-        this.router.post('/', AuthMiddleware_1.auth, AuthMiddleware_1.adminAccess, upload.single('photo'), UserValidator_1.validate, UserController_1.default.create);
+        this.router.post('/', upload.single('photo'), UserValidator_1.validate, UserController_1.default.create);
         this.router.get('/:id', AuthMiddleware_1.auth, AuthMiddleware_1.adminAccess, UserController_1.default.show);
         this.router.put('/:id', AuthMiddleware_1.auth, AuthMiddleware_1.adminAccess, UserValidator_1.updateValidate, UserController_1.default.update);
         this.router.delete('/:id', AuthMiddleware_1.auth, AuthMiddleware_1.adminAccess, UserController_1.default.delete);
