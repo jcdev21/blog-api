@@ -23,7 +23,7 @@ const upload = multer({
 class UserRoutes extends BaseRouter {
     public routes(): void {
         this.router.get('/', auth, adminAccess, UserController.index);
-        this.router.post('/', upload.single('photo'), validate, UserController.create);
+        this.router.post('/', auth, adminAccess, upload.single('photo'), validate, UserController.create);
         this.router.get('/:id', auth, adminAccess, UserController.show);
         this.router.put('/:id', auth, adminAccess, updateValidate, UserController.update);
         this.router.delete('/:id', auth, adminAccess, UserController.delete);

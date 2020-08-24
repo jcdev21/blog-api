@@ -13,7 +13,6 @@ import BlogRoutes from './routers/BlogRoutes';
 
 // Client Routers
 import ClientBlogRoutes from './routers/client/ClientBlogRoutes';
-import TestingRoutes from './routers/client/TestingRoutes';
 
 class App {
     public app: Application;
@@ -37,12 +36,11 @@ class App {
 
     protected routes(): void {
         this.app.route('/').get((req: Request, res: Response) => {
-            res.send("Blog API, by. Muhammad Jundurrahmans ok");
+            res.send("Blog API, by. JcDev21");
         });
 
         // Client
-        this.app.use('/api', cors(), ClientBlogRoutes);
-        this.app.use('/testing', cors(), TestingRoutes);
+        this.app.use('/api', ClientBlogRoutes);
 
         // Server
         this.app.use('/api/v1/users', UserRoutes);
