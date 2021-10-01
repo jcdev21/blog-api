@@ -17,11 +17,12 @@ module.exports = {
     "operatorsAliases": false
   },
   "production": {
-    "username": "cpbxfchmwqrcnm",
-    "password": "b0edcd151b338000583cefef9384dbb02e3dae49bae220e6453e9b3cced7b177",
-    "database": "des65gh3nocuu9",
-    "host": "ec2-52-204-20-42.compute-1.amazonaws.com",
-    "dialect": "postgres",
+    "username": process.env.PROD_PSQL_DB_USERNAME,
+    "password": process.env.PROD_PSQL_DB_PASSWORD,
+    "database": process.env.PROD_PSQL_DB_NAME,
+    "host": process.env.PROD_PSQL_DB_HOST,
+    "dialect": process.env.PROD_PSQL_DB_DIALECT,
+    "ssl": true,
     "operatorsAliases": false
   }
 }
