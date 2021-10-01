@@ -22,9 +22,11 @@ module.exports = {
     "database": process.env.PROD_PSQL_DB_NAME,
     "host": process.env.PROD_PSQL_DB_HOST,
     "dialect": process.env.PROD_PSQL_DB_DIALECT,
-    "ssl": true,
     "dialectOptions": {
-      "ssl": { "require": true }
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
     },
     "operatorsAliases": false
   }
